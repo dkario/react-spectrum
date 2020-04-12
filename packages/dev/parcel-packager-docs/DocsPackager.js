@@ -106,7 +106,7 @@ module.exports = new Packager({
           let params = paramStack[paramStack.length - 1];
           if (t && t.type === 'application') {
             application = null;
-            if (t.base && t.base.type !== 'identifier') {
+            if (t.base && t.base.type !== 'identifier' && t.base.type !== 'link') {
               return t.base;
             }
           }
@@ -121,7 +121,7 @@ module.exports = new Packager({
               nodes[t.id] = merged;
             }
 
-            if (!k || k === 'props' || k === 'extends' || k === 'base') {
+            if (!k || k === 'props' || k === 'extends' || (k === 'base' && !t.typeParameters)) {
               return merged;
             }
 
@@ -209,7 +209,8 @@ function mergeInterface(obj) {
     name: obj.name,
     properties,
     typeParameters: obj.typeParameters,
-    extends: []
+    extends: [],
+    description: obj.description
   };
 }
 

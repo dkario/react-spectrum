@@ -16,3 +16,4 @@ export * from './HeaderInfo';
 export * from './ResourceCard';
 export * from './types';
 export * from './FunctionAPI';
+export * from './TypeLink';
